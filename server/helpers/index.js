@@ -23,7 +23,7 @@ const getFullPopulateObject = (modelUid, maxDepth = 20, ignore) => {
   const model = strapi.getModel(modelUid);
   if (ignore && !ignore.includes(model.collectionName)) ignore.push(model.collectionName)
   for (const [key, value] of Object.entries(
-    getModelPopulationAttributes(model)
+      getModelPopulationAttributes(model)
   )) {
     if (ignore?.includes(key)) continue
     if (value) {
@@ -32,14 +32,14 @@ const getFullPopulateObject = (modelUid, maxDepth = 20, ignore) => {
       } else if (value.type === "dynamiczone") {
         const dynamicPopulate = value.components.reduce((prev, cur) => {
           const curPopulate = getFullPopulateObject(cur, maxDepth - 1);
-          return curPopulate === true ? prev : merge(prev, curPopulate);
+          return merge(prev, {[cur]: curPopulate});
         }, {});
-        populate[key] = isEmpty(dynamicPopulate) ? true : dynamicPopulate;
+        populate[key] = isEmpty(dynamicPopulate) ? true : { on: dynamicPopulate };
       } else if (value.type === "relation") {
         const relationPopulate = getFullPopulateObject(
-          value.target,
-          (key === 'localizations') && maxDepth > 2 ? 1 : maxDepth - 1,
-          ignore
+            value.target,
+            (key === 'localizations') && maxDepth > 2 ? 1 : maxDepth - 1,
+            ignore
         );
         if (relationPopulate) {
           populate[key] = relationPopulate;
