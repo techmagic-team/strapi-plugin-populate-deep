@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-populate-deep",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Strapi plugin that populates nested content.",
   "strapi": {
     "name": "strapi-plugin-populate-deep",
@@ -9,16 +9,16 @@
   },
   "dependencies": {},
   "author": {
-    "name": "Christofer Jungberg"
+    "name": "Anton Lukianchenko"
   },
   "maintainers": [
     {
-      "name": "Christofer Jungberg"
+      "name": "Anton Lukianchenko"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Barelydead/strapi-plugin-deep-populate"
+    "url": "https://github.com/techmagic-team/strapi-plugin-populate-deep"
   },
   "engines": {
     "node": ">=14.19.1 <=20.x.x",
